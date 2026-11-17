@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Pickup | FreshFoldX Laundromat Bomet</title>
+  <meta name="description" content="Book a laundry pickup and delivery in Bomet with FreshFoldX Laundromat. Choose your service, pickup place, delivery place and time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="FreshFoldX Laundromat home">
+        <svg class="brand-logo" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#0a2a8c"/>
+          <rect x="17" y="13" width="30" height="38" rx="4" fill="#fff"/>
+          <circle cx="23" cy="19" r="1.8" fill="#0a2a8c"/><circle cx="28" cy="19" r="1.8" fill="#0a2a8c"/>
+          <circle cx="32" cy="35" r="10" fill="#1d6fe8"/><circle cx="32" cy="35" r="6.5" fill="#3fa9ff"/>
+        </svg>
+        <div>Fresh<span>Fold</span><span class="x">X</span><small>LAUNDROMAT</small></div>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#location">Location</a></li>
+        <li><a href="booking.html" class="btn btn-primary active">Book Now</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="color:#8cc4ff">Pickup &amp; Delivery</span>
+      <h1>Book an Appointment</h1>
+      <p>Tell us what you need, where to collect it and when. We’ll confirm quickly.</p>
+    </div>
+  </section>
+
+  <section class="booking-wrap">
+    <div class="container booking-grid">
+
+      <!-- ===== BOOKING FORM ===== -->
+      <form class="card" id="bookingForm" novalidate>
+        <h2>Your booking details</h2>
+        <p class="hint">Fields marked <span style="color:#d62839">*</span> are required.</p>
+
+        <fieldset>
+          <legend>1. Your details</legend>
+          <div class="row">
+            <div class="field">
+              <label for="name">Full name <span class="req">*</span></label>
+              <input type="text" id="name" name="name" placeholder="e.g. Jane Chepkoech" autocomplete="name" />
+              <div class="error">Please enter your name.</div>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="07XX XXX XXX" autocomplete="tel" />
+              <div class="error">Enter a valid Kenyan phone number (e.g. 0712345678).</div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Services needed <span class="req">*</span></legend>
+          <div class="choices" id="serviceChoices">
+            <label class="choice"><input type="checkbox" name="service" value="Wash & Dry" /> Wash &amp; Dry</label>
+            <label class="choice"><input type="checkbox" name="service" value="Fold & Pack" /> Fold &amp; Pack</label>
+            <label class="choice"><input type="checkbox" name="service" value="Ironing Service" /> Ironing Service</label>
+            <label class="choice"><input type="checkbox" name="service" value="Bedding & Linen" /> Bedding &amp; Linen</label>
+            <label class="choice"><input type="checkbox" name="service" value="Carpet Cleaning" /> Carpet Cleaning</label>
+          </div>
+          <div class="field" id="serviceField"><div class="error">Please choose at least one service.</div></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. How should we handle it?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="mode" value="pickup" checked /> Pickup &amp; delivery</label>
+            <label class="choice"><input type="radio" name="mode" value="dropoff" /> I’ll drop off &amp; collect at the shop</label>
+          </div>
+        </fieldset>
+
+        <!-- Pickup + delivery block (hidden when customer chooses drop-off) -->
+        <div id="pickupBlock">
+          <fieldset>
+            <legend>4. Pickup place &amp; time</legend>
+            <div class="row">
+              <div class="field">
+                <label for="pickupArea">Pickup area <span class="req">*</span></label>
+                <select id="pickupArea" name="pickupArea"></select>
+                <div class="error">Please choose a pickup area.</div>
+              </div>
+              <div class="field">
+                <label for="pickupPlace">Exact pickup place <span class="req">*</span></label>
+                <input type="text" id="pickupPlace" name="pickupPlace" placeholder="Building, house no., landmark" />
+                <div class="error">Please tell us exactly where to pick up.</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="pickupDate">Pickup date <span class="req">*</span></label>
+                <input type="date" id="pickupDate" name="pickupDate" />
+                <div class="error">Choose a pickup date (today or later).</div>
+              </div>
+              <div class="field">
+                <label for="pickupTime">Pickup time <span class="req">*</span></label>
+                <select id="pickupTime" name="pickupTime"></select>
+                <div class="error">Please choose a pickup time.</div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>5. Delivery place &amp; time</legend>
+            <label class="choice" style="margin-bottom:16px">
+              <input type="checkbox" id="sameAsPickup" checked /> Deliver to the same place as pickup
+            </label>
+            <div id="deliveryFields" class="hidden">
+              <div class="row">
+                <div class="field">
+                  <label for="deliveryArea">Delivery area <span class="req">*</span></label>
+                  <select id="deliveryArea" name="deliveryArea"></select>
+                  <div class="error">Please choose a delivery area.</div>
+                </div>
+                <div class="field">
+                  <label for="deliveryPlace">Exact delivery place <span class="req">*</span></label>
+                  <input type="text" id="deliveryPlace" name="deliveryPlace" placeholder="Building, house no., landmark" />
+                  <div class="error">Please tell us exactly where to deliver.</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="deliveryDate">Preferred delivery date <span class="req">*</span></label>
+                <input type="date" id="deliveryDate" name="deliveryDate" />
+                <div class="error">Delivery date must be on or after the pickup date.</div>
+              </div>
+              <div class="field">
+                <label for="deliveryTime">Preferred delivery time <span class="req">*</span></label>
+                <select id="deliveryTime" name="deliveryTime"></select>
+                <div class="error">Please choose a delivery time.</div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Drop-off block (hidden by default) -->
+        <div id="dropoffBlock" class="hidden">
+          <fieldset>
+            <legend>4. When will you visit us?</legend>
+            <div class="row">
+              <div class="field">
+                <label for="visitDate">Drop-off date <span class="req">*</span></label>
+                <input type="date" id="visitDate" name="visitDate" />
+                <div class="error">Choose a date (today or later).</div>
+              </div>
+              <div class="field">
+                <label for="visitTime">Drop-off time <span class="req">*</span></label>
+                <select id="visitTime" name="visitTime"></select>
+                <div class="error">Please choose a time.</div>
+              </div>
+            </div>
+            <p class="notice">📍 FreshFoldX — next to The Williis Hotel, Bomet.</p>
+          </fieldset>
+        </div>
+
+        <fieldset>
+          <legend>Anything else we should know?</legend>
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" name="notes" placeholder="e.g. approximate number of items, delicate fabrics, stains, gate code, call before arrival…"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Review my booking</button>
+          <a href="tel:+254742890211" class="btn btn-dark">📞 Call instead</a>
+        </div>
+
+        <!-- Summary shown after validation -->
+        <div class="summary" id="summary" aria-live="polite">
+          <h3>✅ Almost done — confirm your booking</h3>
+          <pre id="summaryText"></pre>
+          <div class="submit-row">
+            <a id="whatsappBtn" class="btn btn-whatsapp" target="_blank" rel="noopener">Send booking on WhatsApp</a>
+            <button type="button" id="copyBtn" class="btn btn-dark">Copy details</button>
+          </div>
+          <p class="hint" style="margin-top:12px;margin-bottom:0">Tapping “Send” opens WhatsApp with your booking ready to go. We’ll reply to confirm pickup.</p>
+        </div>
+      </form>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside>
+        <div class="card side-card">
+          <h3>📍 Where we are</h3>
+          <ul class="side-list">
+            <li><b>Shop</b> Next to The Williis Hotel, Bomet</li>
+            <li><b>Phone</b> <a href="tel:+254742890211">0742 890 211</a></li>
+            <li><b>Hours</b> Mon – Sat, 7:00 AM – 7:00 PM</li>
+          </ul>
+        </div>
+        <div class="card side-card">
+          <h3>🚚 Pickup &amp; delivery areas</h3>
+          <div class="tag-list" id="areaTags"></div>
+          <p class="hint" style="margin:14px 0 0">Not on the list? Choose “Other” and tell us — we’ll confirm if we can reach you.</p>
+        </div>
+        <div class="card side-card">
+          <h3>🕒 Pickup time slots</h3>
+          <div class="tag-list" id="slotTags"></div>
+          <p class="hint" style="margin:14px 0 0">Pick the slot that suits you; our rider arrives within it.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="site-footer" style="margin-top:80px">
+    <div class="container">
+      <p><strong>FreshFoldX Laundromat</strong> • Next to The Williis Hotel, Bomet • 0742 890 211</p>
+      <p>© <span id="year"></span> FreshFoldX Laundromat. Fresh. Clean. Folded to Perfection.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
